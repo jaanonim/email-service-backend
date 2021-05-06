@@ -17,7 +17,7 @@ You need to create .env file in it some sensetive data.
 ### Migration and sync the database
 Create an initial migration for models, and sync the database for the first time.
 ```
-manage.py makemigrations email_messages tasks groups emails users
+manage.py makemigrations email_messages tasks groups emails
 manage.py migrate
 ```
 ### Start up a server

@@ -1,3 +1,22 @@
-from django.shortcuts import render
+from rest_framework.filters import OrderingFilter, SearchFilter
+from rest_framework.generics import ListAPIView
+from rest_framework.pagination import PageNumberPagination
 
-# Create your views here.
+from .models import Message
+from .serializers import MessageSerializer
+
+
+class FilterMessageView(ListAPIView):
+
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
+    pagination_class = PageNumberPagination
+    filter_backends = (
+        SearchFilter,
+        OrderingFilter,
+    )
+    search_fields = ("name", "title")
+    ordering_fields = (
+        "name",
+        "title",
+    )
