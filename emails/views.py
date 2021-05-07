@@ -1,3 +1,4 @@
+from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import ListAPIView
 from rest_framework.pagination import PageNumberPagination
@@ -21,3 +22,9 @@ class FilterEmailView(ListAPIView):
         "email",
         "group__name",
     )
+
+
+class EmailViewSet(viewsets.ModelViewSet):
+
+    queryset = Email.objects.all()
+    serializer_class = EmailSerializer

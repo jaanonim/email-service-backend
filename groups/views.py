@@ -1,3 +1,4 @@
+from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import ListAPIView
 from rest_framework.pagination import PageNumberPagination
@@ -17,3 +18,9 @@ class FilterGroupView(ListAPIView):
     )
     search_fields = ("name",)
     ordering_fields = ("name",)
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer

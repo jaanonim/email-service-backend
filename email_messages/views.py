@@ -1,3 +1,4 @@
+from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import ListAPIView
 from rest_framework.pagination import PageNumberPagination
@@ -20,3 +21,9 @@ class FilterMessageView(ListAPIView):
         "name",
         "title",
     )
+
+class MessageViewSet(viewsets.ModelViewSet):
+
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
+

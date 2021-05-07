@@ -1,3 +1,4 @@
+from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import ListAPIView
 from rest_framework.pagination import PageNumberPagination
@@ -17,3 +18,9 @@ class FilterTaskView(ListAPIView):
     )
     search_fields = ("name", "status", "group__name", "term")
     ordering_fields = ("name", "status", "term")
+
+
+class TaskViewSet(viewsets.ModelViewSet):
+
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
