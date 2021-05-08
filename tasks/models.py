@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import models
+from django.utils import timezone
 
 STAUS_OPTIONS = ((1, "waiting"), (2, "processing"), (3, "done"), (4, "fail"))
 
@@ -10,7 +11,7 @@ class Task(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(default="", blank=True, null=True)
     status = models.IntegerField(choices=STAUS_OPTIONS, editable=False, default=1)
-    term = models.DateTimeField(auto_now=True)
+    term = models.DateTimeField(default=timezone.now)
     group = models.ForeignKey(
         "groups.group", on_delete=models.CASCADE, blank=True, null=True
     )
@@ -31,5 +32,10 @@ class Task(models.Model):
         super().delete(using=using, keep_parents=keep_parents)
         self.on_update()
 
+    def execute(self):
+        print("Excuted", self.name)
+
     def on_update(self):
-        print("updated: ", self.name)
+        from app.schedule import updateList
+
+        updateList()
