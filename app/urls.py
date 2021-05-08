@@ -20,9 +20,13 @@ from emails import urls as emailUrls
 from groups import urls as groupUrls
 from tasks import urls as taskUrls
 
+from .schedule import startTreading
+
 urlpatterns = [
     path("messages/", include(messageUrls)),
     path("emails/", include(emailUrls)),
     path("groups/", include(groupUrls)),
     path("tasks/", include(taskUrls)),
 ]
+
+startTreading()

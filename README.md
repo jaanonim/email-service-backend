@@ -1,7 +1,7 @@
 [![wakatime](https://wakatime.com/badge/github/jaanonim/emailService-backend.svg)](https://wakatime.com/badge/github/jaanonim/emailService-backend)
 # emailService backend 
 Backend for email sending application
-## Instalation:
+## Instalation (on windows):
 ### Create and activate environment
 Create and activate a virtual environment.
 ```

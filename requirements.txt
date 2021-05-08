@@ -3,3 +3,4 @@ django
 djangorestframework
 django-environ
 uuid
+schedule
