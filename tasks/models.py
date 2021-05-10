@@ -1,7 +1,11 @@
 import uuid
 
+from django.core.mail import send_mail
 from django.db import models
 from django.utils import timezone
+from emails.models import Email
+
+from .email import sendEmailThread
 
 STAUS_OPTIONS = ((1, "waiting"), (2, "processing"), (3, "done"), (4, "fail"))
 
@@ -34,8 +38,23 @@ class Task(models.Model):
 
     def execute(self):
         print("Excuted", self.name)
+        emails = []
+
+        if self.group:
+            emails_obj = self.group.email_set.all()
+        else:
+            emails_obj = Email.objects.all()
+        for obj in emails_obj:
+            emails.append(obj.email)
+
+        sendEmailThread(
+            title=self.message.title,
+            message=self.message.content,
+            email_addres=emails,
+            task=self,
+        )
 
     def on_update(self):
-        from app.schedule import updateList
+        from app.schedule import s
 
-        updateList()
+        s.updateList()

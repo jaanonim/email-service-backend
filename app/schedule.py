@@ -1,42 +1,43 @@
 import threading
 import time
 
+from django.conf import settings
 from django.utils import timezone
 from tasks.models import Task
 
 import schedule
 
-tasks = []
+
+class ScheduleTasks:
+    def __init__(self):
+        self.tasks = []
+        self.updateList()
+
+    def updateList(self):
+
+        print("updating ...")
+
+        self.tasks = Task.objects.filter(status=1)
+        self.checkForTask()
+
+    def checkForTask(self):
+        print("cheking ...")
+
+        for task in self.tasks:
+            if task.term < timezone.now():
+                thread = threading.Thread(
+                    target=task.execute, name="Executing task: " + task.name
+                )
+                thread.start()
+                task.status = 2
+                task.save()
 
 
-def updateList():
-    global tasks
-
-    print("updating ...")
-
-    tasks = Task.objects.filter(status=1)
-    print(tasks)
-
-
-def checkForTask():
-    print("cheking ...")
-
-    for task in tasks:
-        print(task.term, timezone.now(), task.term < timezone.now())
-        if task.term < timezone.now():
-            thread = threading.Thread(
-                target=task.execute, name="Executing task: " + task.name
-            )
-            thread.start()
-            task.status = 2
-            task.save()
+s = ScheduleTasks()
 
 
 def treadFunction():
-    updateList()
-    checkForTask()
-
-    schedule.every().minutes.do(checkForTask)
+    schedule.every().minutes.do(s.checkForTask)
 
     while True:
         schedule.run_pending()

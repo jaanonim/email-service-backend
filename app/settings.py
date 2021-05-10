@@ -141,3 +141,10 @@ STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# E-mail
+EMAIL_USE_TLS = True
+EMAIL_CONFIG = env.email_url(
+    'EMAIL_URL')
+
+vars().update(EMAIL_CONFIG)

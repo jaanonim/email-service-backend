@@ -14,13 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.db import connection
 from django.urls import include, path
 from email_messages import urls as messageUrls
 from emails import urls as emailUrls
 from groups import urls as groupUrls
 from tasks import urls as taskUrls
-
-from .schedule import startTreading
 
 urlpatterns = [
     path("messages/", include(messageUrls)),
@@ -29,4 +28,15 @@ urlpatterns = [
     path("tasks/", include(taskUrls)),
 ]
 
-startTreading()
+
+def table_exists(table_name):
+    try:
+        return table_name in connection.introspection.table_names()
+    except Exception as e:
+        return False
+
+
+if table_exists("tasks_task"):
+    from .schedule import startTreading
+
+    startTreading()
