@@ -144,7 +144,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # E-mail
 EMAIL_USE_TLS = True
-EMAIL_CONFIG = env.email_url(
-    'EMAIL_URL')
+EMAIL_CONFIG = env.email_url("EMAIL_URL")
 
 vars().update(EMAIL_CONFIG)
+
+TIME_BETWEEN_CHECKS = int(env("TIME_BETWEEN_CHECKS"))

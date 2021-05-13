@@ -37,7 +37,7 @@ s = ScheduleTasks()
 
 
 def treadFunction():
-    schedule.every().minutes.do(s.checkForTask)
+    schedule.every(settings.TIME_BETWEEN_CHECKS).minutes.do(s.checkForTask)
 
     while True:
         schedule.run_pending()
