@@ -4,3 +4,4 @@ djangorestframework
 django-environ
 uuid
 schedule
+django-cors-headers
