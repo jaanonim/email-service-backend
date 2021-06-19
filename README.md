@@ -1,6 +1,6 @@
 # email-service-backend 
 
-[![wakatime](https://wakatime.com/badge/github/jaanonim/emailService-backend.svg)](https://wakatime.com/badge/github/jaanonim/emailService-backend)
+[![wakatime](https://wakatime.com/badge/github/jaanonim/email-service-backend.svg)](https://wakatime.com/badge/github/jaanonim/email-service-backend)
 
 Backend for email sending application
 ## Instalation (on windows):
