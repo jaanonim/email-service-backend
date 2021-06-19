@@ -1,5 +1,7 @@
-[![wakatime](https://wakatime.com/badge/github/jaanonim/emailService-backend.svg)](https://wakatime.com/badge/github/jaanonim/emailService-backend)
 # email-service-backend 
+
+[![wakatime](https://wakatime.com/badge/github/jaanonim/emailService-backend.svg)](https://wakatime.com/badge/github/jaanonim/emailService-backend)
+
 Backend for email sending application
 ## Instalation (on windows):
 ### Create and activate environment
